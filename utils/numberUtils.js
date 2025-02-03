@@ -28,10 +28,10 @@ const isArmstrong = (num) => {
     return sum === num;
 };
 
-// Check if the number is odd or even
+
 const getParity = (num) => (num % 2 === 0 ? 'even' : 'odd');
 
-// Calculate the sum of digits
+
 const digitSum = (num) => {
     return num
         .toString()

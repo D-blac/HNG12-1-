@@ -4,7 +4,7 @@ const { isPrime, isPerfect, isArmstrong, getParity, digitSum } = require('../uti
 const classifyNumber = async (req, res) => {
     const number = req.query.number;
 
-    // Input Validation
+    
     if (!number || isNaN(number)) {
         return res.status(400).json({ number, error: true });
     }
@@ -13,12 +13,12 @@ const classifyNumber = async (req, res) => {
     const properties = [];
     let funFact = '';
 
-    // Check for Armstrong number
+   
     const armstrong = isArmstrong(num);
     if (armstrong) {
         properties.push('armstrong');
 
-        // Custom Fun Fact for Armstrong Number
+      
         const digits = num.toString().split('').map(Number);
         const power = digits.length;
         const calculation = digits.map(d => `${d}^${power}`).join(' + ');
