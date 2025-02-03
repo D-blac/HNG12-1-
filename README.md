@@ -3,7 +3,7 @@
 This API classifies numbers based on interesting mathematical properties and provides a fun fact about the number. It was built for the **HNG12 Stage 1 Backend Task** using **Node.js**.
 
 ## 🚀 Deployed URL
-[View API](https://number-classification-api.onrender.com/api/classify-number?number=371)
+ hng12-1-production.up.railway.app
 
 ---
 
@@ -51,7 +51,7 @@ Deployed on Render
 ## Deployment
 Clone the repository:
 
-**git clone https://github.com/your-username/number-classification-api.git**
+**git clone https://(https://github.com/D-blac/HNG12-1-.git)**
 
 Install dependencies:
 npm install
