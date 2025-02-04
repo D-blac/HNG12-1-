@@ -3,12 +3,12 @@
 This API classifies numbers based on interesting mathematical properties and provides a fun fact about the number. It was built for the **HNG12 Stage 1 Backend Task** using **Node.js**.
 
 ## 🚀 Deployed URL
- hng12-1-production.up.railway.app
+ https://hng12-1-production.up.railway.app/
 
 ---
 
 ## 📥 API Endpoint
-- **Base URL:** http://localhost:7777/api/classify-number?number=371
+- **Base URL:** http://localhost:7771/api/classify-number?number=371
 - **Method:** `GET`
 - **Query Parameter:**
   - `number` (required): The integer you want to classify.
@@ -51,7 +51,7 @@ Deployed on Render
 ## Deployment
 Clone the repository:
 
-**git clone https://(https://github.com/D-blac/HNG12-1-.git)**
+**git clone https://github.com/D-blac/HNG12-1-.git**
 
 Install dependencies:
 npm install
