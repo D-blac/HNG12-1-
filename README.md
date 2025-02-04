@@ -13,9 +13,11 @@ This API classifies numbers based on interesting mathematical properties and pro
 - **Query Parameter:**
   - `number` (required): The integer you want to classify.
 
+  
+
 ### ✅ Example Request:
 
-GET http://localhost:7777/api/classify-number?number=371
+GET http://localhost:7771/api/classify-number?number=371
 # Response
 {
     "number": 371,

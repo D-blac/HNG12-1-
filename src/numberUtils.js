@@ -30,7 +30,7 @@ const digitSum = (num) => num.toString().split('').reduce((acc, val) => acc + Nu
 
 const getFunFact = async (num) => {
     try {
-        const response = await axios.get(`http://numbersapi.com/${num}/math?json`, { timeout: 3000 });
+        const response = await axios.get(`http://numbersapi.com/${num}/math?json`, { timeout: 500 });
         return response.data.text;
     } catch (error) {
         console.error('Numbers API error:', error.message);
@@ -42,25 +42,31 @@ const processNumberLogic = async (req, res) => {
     const number = req.query.number;
 
     if (!number || isNaN(number)) {
-        return res.status(400).json({ number: "alphabet", error: true });
+        return res.status(400).json({ error: true, number: number });
     }
+    
 
     const num = parseInt(number);
     const properties = [];
     let funFact = '';
 
-    if (isArmstrong(num)) {
-        properties.push('armstrong');
-        const digits = num.toString().split('').map(Number);
+    const absNum = Math.abs(num); 
+
+    if (isArmstrong(absNum)) {
+        if (!properties.includes('armstrong')) {
+            properties.push('armstrong');
+        }
+        const digits = absNum.toString().split('').map(Number);
         const power = digits.length;
         const calculation = digits.map(d => `${d}^${power}`).join(' + ');
-        funFact = `${num} is an Armstrong number because ${calculation} = ${num}`;
-    } else {
-        funFact = await getFunFact(num);
+        funFact = `${num} is an Armstrong number because ${calculation} = ${absNum}`;
     }
-
-    properties.push(getParity(num));
-
+    
+    const parity = getParity(num);
+    if (!properties.includes(parity)) {
+        properties.push(parity);
+    }
+    
     res.status(200).json({
         number: num,
         is_prime: isPrime(num),
