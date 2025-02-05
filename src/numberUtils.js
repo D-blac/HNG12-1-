@@ -9,6 +9,7 @@ const isPrime = (num) => {
 };
 
 const isPerfect = (num) => {
+    if (num < 1) return false;
     let sum = 1;
     for (let i = 2; i <= Math.sqrt(num); i++) {
         if (num % i === 0) {
@@ -26,7 +27,7 @@ const isArmstrong = (num) => {
 
 const getParity = (num) => (num % 2 === 0 ? 'even' : 'odd');
 
-const digitSum = (num) => num.toString().split('').reduce((acc, val) => acc + Number(val), 0);
+const digitSum = (num) => Math.abs(num).toString().split('').reduce((acc, val) => acc + Number(val), 0);
 
 const getFunFact = async (num) => {
     try {
@@ -41,41 +42,33 @@ const getFunFact = async (num) => {
 const processNumberLogic = async (req, res) => {
     const number = req.query.number;
 
-    if (!number || isNaN(number)) {
+    if (number === undefined || number.trim() === '' || isNaN(number)) {
         return res.status(400).json({ error: true, number: number });
     }
-    
 
     const num = parseInt(number);
+    const absNum = Math.abs(num);
     const properties = [];
     let funFact = '';
 
-    const absNum = Math.abs(num); 
-
     if (isArmstrong(absNum)) {
-        if (!properties.includes('armstrong')) {
-            properties.push('armstrong');
-        }
+        properties.push('armstrong');
         const digits = absNum.toString().split('').map(Number);
         const power = digits.length;
         const calculation = digits.map(d => `${d}^${power}`).join(' + ');
         funFact = `${num} is an Armstrong number because ${calculation} = ${absNum}`;
     }
-    
-    const parity = getParity(num);
-    if (!properties.includes(parity)) {
-        properties.push(parity);
-    }
-    
+
+    properties.push(getParity(num));
+
     res.status(200).json({
         number: num,
         is_prime: isPrime(num),
         is_perfect: isPerfect(num),
-        properties: JSON.parse(JSON.stringify(properties)),
+        properties: [...new Set(properties)],
         digit_sum: digitSum(num),
-        fun_fact: funFact,
+        fun_fact: funFact || await getFunFact(num),
     });
-    
 };
 
 module.exports = { processNumberLogic };
